@@ -1,0 +1,113 @@
+@-webkit-keyframes line-scale-party {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5); }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+
+@-moz-keyframes line-scale-party {
+  0% {
+    -moz-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -moz-transform: scale(0.5);
+    transform: scale(0.5); }
+  100% {
+    -moz-transform: scale(1);
+    transform: scale(1); } }
+
+@-o-keyframes line-scale-party {
+  0% {
+    -o-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -o-transform: scale(0.5);
+    transform: scale(0.5); }
+  100% {
+    -o-transform: scale(1);
+    transform: scale(1); } }
+
+@keyframes line-scale-party {
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+  50% {
+    -webkit-transform: scale(0.5);
+    -moz-transform: scale(0.5);
+    -o-transform: scale(0.5);
+    transform: scale(0.5); }
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); } }
+
+.line-scale-party > div:nth-child(1) {
+  -webkit-animation-delay: 0.61s;
+  -moz-animation-delay: 0.61s;
+  -o-animation-delay: 0.61s;
+  animation-delay: 0.61s;
+  -webkit-animation-duration: 0.94s;
+  -moz-animation-duration: 0.94s;
+  -o-animation-duration: 0.94s;
+  animation-duration: 0.94s; }
+
+.line-scale-party > div:nth-child(2) {
+  -webkit-animation-delay: 0.25s;
+  -moz-animation-delay: 0.25s;
+  -o-animation-delay: 0.25s;
+  animation-delay: 0.25s;
+  -webkit-animation-duration: 0.81s;
+  -moz-animation-duration: 0.81s;
+  -o-animation-duration: 0.81s;
+  animation-duration: 0.81s; }
+
+.line-scale-party > div:nth-child(3) {
+  -webkit-animation-delay: 0.53s;
+  -moz-animation-delay: 0.53s;
+  -o-animation-delay: 0.53s;
+  animation-delay: 0.53s;
+  -webkit-animation-duration: 1.23s;
+  -moz-animation-duration: 1.23s;
+  -o-animation-duration: 1.23s;
+  animation-duration: 1.23s; }
+
+.line-scale-party > div:nth-child(4) {
+  -webkit-animation-delay: 0.59s;
+  -moz-animation-delay: 0.59s;
+  -o-animation-delay: 0.59s;
+  animation-delay: 0.59s;
+  -webkit-animation-duration: 0.47s;
+  -moz-animation-duration: 0.47s;
+  -o-animation-duration: 0.47s;
+  animation-duration: 0.47s; }
+
+.line-scale-party > div {
+  background-color: #6b6f82;
+  width: 4px;
+  height: 3.45rem;
+  border-radius: 2px;
+  margin: 2px;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  display: inline-block;
+  -webkit-animation-name: line-scale-party;
+  -moz-animation-name: line-scale-party;
+  -o-animation-name: line-scale-party;
+  animation-name: line-scale-party;
+  -webkit-animation-iteration-count: infinite;
+  -moz-animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay: 0;
+  animation-delay: 0; }

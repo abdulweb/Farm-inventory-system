@@ -1,0 +1,288 @@
+/*=========================================================================================
+	File Name: horizontal-menu.scss
+	Description: A classic horizontal menu for easy navingation & support all devices.
+	It support light & dark version, filpped layout, right side icons, borders menu for
+	item seperation.
+	----------------------------------------------------------------------------------------
+	Item Name: Modern Admin - Clean Bootstrap 4 Dashboard HTML Template
+	 Version: 3.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+.horizontal-menu .navbar-horizontal .nav-item i {
+  font-size: 1.6rem;
+  margin-right: 0.5rem;
+  position: relative;
+  top: -2px; }
+
+.horizontal-menu .navbar-horizontal .nav-item a span {
+  font-size: 1.1rem; }
+
+.horizontal-menu .navbar-horizontal.navbar-icon-right .nav-item i {
+  top: 4px; }
+
+.horizontal-menu .header-navbar .navbar-container {
+  height: auto; }
+
+.horizontal-menu .navbar-horizontal ul#main-menu-navigation > li > a {
+  padding: 1.8rem 1rem; }
+
+.horizontal-menu #main-menu-navigation ul li a span {
+  -webkit-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  display: inline-block; }
+  .horizontal-menu #main-menu-navigation ul li a span:hover,
+  .horizontal-menu #main-menu-navigation ul li a span .hover {
+    -webkit-transform: translateX(4px);
+    -moz-transform: translateX(4px);
+    -ms-transform: translateX(4px);
+    -o-transform: translateX(4px);
+    transform: translateX(4px); }
+
+.horizontal-menu.menu-collapsed .navbar-horizontal .nav-item i {
+  margin-right: 0; }
+
+.horizontal-menu.menu-collapsed #main-menu-navigation .nav-item > a > span {
+  display: none; }
+
+.horizontal-menu .navigation-header {
+  font-family: inherit;
+  color: #929292;
+  padding: 8px 20px;
+  font-size: 1rem; }
+
+.horizontal-menu .navbar-flipped .navbar-nav .nav-item {
+  float: right; }
+
+.horizontal-menu .navbar-light ul#main-menu-navigation > li.active > a {
+  border-bottom: 1px solid #00bcd4;
+  background: #fff; }
+
+.horizontal-menu .navbar-light .active > a {
+  background: whitesmoke;
+  font-weight: 500; }
+
+.horizontal-menu .navbar-dark .nav-item.active > a {
+  background-color: rgba(255, 255, 255, 0.05); }
+
+.horizontal-menu .navbar-dark .nav-item:hover,
+.horizontal-menu .navbar-dark .nav-item .hover {
+  background-color: rgba(255, 255, 255, 0.05); }
+
+.horizontal-menu .navbar-dark .active > a {
+  background: whitesmoke;
+  font-weight: 500; }
+
+.horizontal-menu[data-col="content-left-sidebar"] .sticky-wrapper {
+  float: none; }
+
+.material-horizontal-layout .header-navbar .navbar-container .dropdown-menu .dropdown-submenu .dropdown-item.dropdown-toggle {
+  padding-right: 2.5rem; }
+
+.material-horizontal-layout .main-menu .navigation > li > a i,
+.material-horizontal-nav .main-menu .navigation > li > a i {
+  position: relative;
+  top: 8px; }
+  .material-horizontal-layout .main-menu .navigation > li > a i.material-icons,
+  .material-horizontal-nav .main-menu .navigation > li > a i.material-icons {
+    font-size: 1.3rem; }
+
+.material-horizontal-layout .main-menu .navigation > li > ul > li > a i.material-icons,
+.material-horizontal-nav .main-menu .navigation > li > ul > li > a i.material-icons {
+  font-size: 1.3rem;
+  margin-right: 0.5rem; }
+
+@media screen and (max-width: 1200px) and (min-width: 992px) {
+  .material-horizontal-layout .navbar-with-menu.navbar-brand-center .navbar-wrapper .navbar-container .collapse .nav .nav-link-expand, .material-horizontal-layout .navbar-with-menu.navbar-brand-center .navbar-wrapper .navbar-container .collapse .nav .mega-dropdown .dropdown-toggle {
+    padding-right: 0rem;
+    padding-left: 0rem; } }
+
+/*=========================================================================================
+	File Name: vertical-overlay-menu.scss
+	Description: A overlay style vertical menu with show and hide support. It support 
+	light & dark version, filpped layout, right side icons, native scroll and borders menu 
+	item seperation.
+	----------------------------------------------------------------------------------------
+	Item Name: Modern Admin - Clean Bootstrap 4 Dashboard HTML Template
+	 Version: 3.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+.vertical-overlay-menu .content {
+  margin-left: 0; }
+
+.vertical-overlay-menu .navbar .navbar-header {
+  float: left;
+  width: 260px; }
+
+.vertical-overlay-menu .navbar.navbar-brand-center .navbar-container {
+  margin-left: 0; }
+
+.vertical-overlay-menu .navbar.navbar-brand-center .navbar-header {
+  float: left;
+  width: auto; }
+
+.vertical-overlay-menu .main-menu, .vertical-overlay-menu.menu-hide .main-menu {
+  opacity: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  -webkit-transition: width .25s, opacity .25s, -webkit-transform .25s;
+  transition: width .25s, opacity .25s, -webkit-transform .25s;
+  -o-transition: width .25s, opacity .25s, -o-transform .25s;
+  -moz-transition: width .25s, opacity .25s, transform .25s, -moz-transform .25s;
+  transition: width .25s, opacity .25s, transform .25s;
+  transition: width .25s, opacity .25s, transform .25s, -webkit-transform .25s, -moz-transform .25s, -o-transform .25s;
+  width: 260px;
+  left: -260px; }
+  .vertical-overlay-menu .main-menu.menu-fixed {
+    height: -webkit-calc(100% - 5rem);
+    height: -moz-calc(100% - 5rem);
+    height: calc(100% - 5rem); }
+    .vertical-overlay-menu .main-menu.menu-fixed .main-menu-content {
+      height: -webkit-calc(100% - 12rem) !important;
+      height: -moz-calc(100% - 12rem) !important;
+      height: calc(100% - 12rem) !important;
+      position: relative; }
+  .vertical-overlay-menu .main-menu .navigation .navigation-header .ft-minus,
+  .vertical-overlay-menu .main-menu .navigation .navigation-header .nav-menu-icon {
+    display: none; }
+  .vertical-overlay-menu .main-menu .navigation > li > a > i {
+    font-size: 1.6rem;
+    margin-right: 12px;
+    float: left; }
+    .vertical-overlay-menu .main-menu .navigation > li > a > i:before {
+      -webkit-transition: 200ms ease all;
+      -o-transition: 200ms ease all;
+      -moz-transition: 200ms ease all;
+      transition: 200ms ease all; }
+  .vertical-overlay-menu .main-menu .navigation li.has-sub > a:not(.mm-next):after {
+    content: "\f112";
+    font-family: 'LineAwesome';
+    font-size: 1rem;
+    display: inline-block;
+    position: absolute;
+    right: 20px;
+    top: 14px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    transition: -webkit-transform 0.2s ease-in-out; }
+  .vertical-overlay-menu .main-menu .navigation li.has-sub .has-sub > a:not(.mm-next):after {
+    top: 8px; }
+  .vertical-overlay-menu .main-menu .navigation li.open > a:not(.mm-next):after {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg); }
+  .vertical-overlay-menu .main-menu .main-menu-footer {
+    bottom: 55px; }
+  .vertical-overlay-menu .main-menu .main-menu-footer {
+    width: 260px; }
+
+.vertical-overlay-menu.menu-open .main-menu {
+  opacity: 1;
+  -webkit-transform: translate3d(260px, 0, 0);
+  -moz-transform: translate3d(260px, 0, 0);
+  transform: translate3d(260px, 0, 0);
+  -webkit-transition: width .25s, opacity .25s, -webkit-transform .25s;
+  transition: width .25s, opacity .25s, -webkit-transform .25s;
+  -o-transition: width .25s, opacity .25s, -o-transform .25s;
+  -moz-transition: width .25s, opacity .25s, transform .25s, -moz-transform .25s;
+  transition: width .25s, opacity .25s, transform .25s;
+  transition: width .25s, opacity .25s, transform .25s, -webkit-transform .25s, -moz-transform .25s, -o-transform .25s; }
+
+.vertical-overlay-menu.menu-flipped .main-menu {
+  right: -260px;
+  left: inherit; }
+
+.vertical-overlay-menu.menu-flipped .navbar .navbar-container {
+  margin: 0;
+  margin-right: 260px; }
+
+.vertical-overlay-menu.menu-flipped .navbar .navbar-header {
+  float: right; }
+
+.vertical-overlay-menu.menu-flipped.menu-open .main-menu {
+  -webkit-transform: translate3d(-260px, 0, 0);
+  -moz-transform: translate3d(-260px, 0, 0);
+  transform: translate3d(-260px, 0, 0); }
+
+.vertical-overlay-menu footer.footer.fixed-bottom {
+  z-index: 999; }
+
+.vertical-overlay-menu.boxed-layout.menu-open .main-menu {
+  -webkit-transform: translate3d(270px, 0, 0) !important;
+  -moz-transform: translate3d(270px, 0, 0) !important;
+  transform: translate3d(270px, 0, 0) !important; }
+
+@media (max-width: 991.98px) {
+  .vertical-overlay-menu .main-menu .main-menu-footer {
+    bottom: 0px; }
+  .vertical-overlay-menu[data-menu="vertical-compact-menu"].boxed-layout.menu-open .main-menu {
+    -webkit-transform: translate3d(120px, 0, 0) !important;
+    -moz-transform: translate3d(120px, 0, 0) !important;
+    transform: translate3d(120px, 0, 0) !important; } }
+
+@media screen and (max-width: 575px) {
+  .vertical-overlay-menu.boxed-layout.menu-open .main-menu {
+    -webkit-transform: translate3d(260px, 0, 0) !important;
+    -moz-transform: translate3d(260px, 0, 0) !important;
+    transform: translate3d(260px, 0, 0) !important; } }
+
+.material-vertical-layout .main-menu .user-profile {
+  -webkit-background-size: cover;
+  background-size: cover; }
+  .material-vertical-layout .main-menu .user-profile .user-info .user-img {
+    border: 3px solid #fff;
+    width: 60px;
+    margin-bottom: 0.5rem; }
+  .material-vertical-layout .main-menu .user-profile .user-info .dropdown-toggle:after {
+    position: relative;
+    top: -1px; }
+  .material-vertical-layout .main-menu .user-profile .user-info .dropdown-menu.arrow {
+    margin-top: 0.5rem; }
+  .material-vertical-layout .main-menu .user-profile .user-info .dropdown-menu:before {
+    background: transparent; }
+  .material-vertical-layout .main-menu .user-profile .user-info .dropdown-menu .dropdown-item .material-icons {
+    font-size: 1.2rem; }
+  .material-vertical-layout .main-menu .user-profile .user-info .dropdown-menu .dropdown-item span.align-middle {
+    font-size: 1rem; }
+
+.material-vertical-layout .main-menu .main-menu-content .navigation li.active > a {
+  background: #673ab7;
+  color: #fff; }
+
+.material-vertical-layout .main-menu.menu-light {
+  border-right: 0; }
+  .material-vertical-layout .main-menu.menu-light .user-profile {
+    background: url("../../../../../app-assets/images/gallery/left-menu-bg.jpg") center center no-repeat; }
+
+.material-vertical-layout .main-menu.menu-dark .user-profile {
+  background: url("../../../../../app-assets/images/gallery/dark-menu.jpg") center center no-repeat; }
+  .material-vertical-layout .main-menu.menu-dark .user-profile .user-info {
+    background-color: rgba(0, 0, 0, 0.35); }
+    .material-vertical-layout .main-menu.menu-dark .user-profile .user-info .dropdown-menu .dropdown-item .material-icons, .material-vertical-layout .main-menu.menu-dark .user-profile .user-info .dropdown-menu .dropdown-item span.align-middle {
+      color: #6b6f82; }
+
+.material-vertical-layout.vertical-compact-menu .main-menu.menu-light {
+  border-right: 1px solid #E4E7ED; }
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .material-vertical-layout .form-control, .material-horizontal-layout .form-control {
+    padding: 0.75rem;
+    min-height: 40px; }
+  .material-vertical-layout .has-icon-left .form-control, .material-horizontal-layout .has-icon-left .form-control {
+    padding: 0.75rem 2rem;
+    min-height: 40px; } }
+
+.material-vertical-layout.vertical-overlay-menu .main-menu .navigation > li > a i {
+  position: relative;
+  top: 0.7rem; }
+  .material-vertical-layout.vertical-overlay-menu .main-menu .navigation > li > a i.material-icons {
+    font-size: 1.5rem; }

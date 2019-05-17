@@ -1,0 +1,4 @@
+.menu-collapsed .ps-theme-dark, .ps-theme-dark {
+  overflow-x: auto !important; }
+  .menu-collapsed .ps-theme-dark > .ps-scrollbar-x-rail, .ps-theme-dark > .ps-scrollbar-x-rail {
+    display: none !important; }
