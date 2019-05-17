@@ -111,12 +111,12 @@
                 </li>
                 <li class="nav-item"><a class="dropdown-toggle nav-link" href="productCategory.php"><i class="la la-tags"></i><span>Categories</span></a>
                 </li>
-                <li class="nav-item"><a class="dropdown-toggle nav-link" href="product.php"><i class="la la-rupee"></i><span>Product</span></a>
+                <li class="nav-item"><a class="dropdown-toggle nav-link" href="product.php"><i class="la la-archive"></i><span>Product</span></a>
                 </li>
                 
                 <li class="nav-item"><a class="dropdown-toggle nav-link" href="sales"><i class="la la-rupee"></i><span>Sales</span></a>
                 </li>
-                <li class="nav-item"><a class="dropdown-toggle nav-link" href="suppliers"><i class="la la-truck"></i><span>Suppliers</span></a>
+                <li class="nav-item"><a class="dropdown-toggle nav-link" href="suppliers.php"><i class="la la-truck"></i><span>Suppliers</span></a>
                 </li>
                 <li class="nav-item"><a class="dropdown-toggle nav-link" href="customers.php"><i class="la la-users"></i><span>Customers</span></a>
                 </li>

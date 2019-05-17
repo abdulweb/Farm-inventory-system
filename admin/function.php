@@ -28,4 +28,11 @@ if (isset($_POST['delete_product'])) {
 	$object = $object->delete_product($id);
 }
 
+if (isset($_POST['addCart'])) {
+	$quantity = $_POST['quantity'];
+	$productID = $_POST['productID'];
+	$custName = $_POST['custName'];
+	$object = $object->cart($quantity,$productID,$custName);
+}
+
 ?>

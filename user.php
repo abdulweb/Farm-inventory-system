@@ -448,6 +448,10 @@ class user extends dbh
 		}
 	}
 
+	public function cart($quantity,$productID,$custName){
+		$smt = "insert into customer_cart(custID,prdID,quantity,date_add) Values()"
+	}
+
 
 
 /* ===================================================================*/
