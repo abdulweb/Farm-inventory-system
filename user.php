@@ -423,13 +423,9 @@ class user extends dbh
 			}
 			else
 			{
-				// echo '<div class ="alert alert-success"> <strong> New customer Added Successfully  </strong> </div>';
-				echo '<script>
-							swal("Deleted!", "Your Record has been deleted.", "success");
-	                    	setTimeout(function(){// wait for 5 secs(2)
-	                       location.reload(); // then reload the page.(3)
-	                  		}, 1000); 
-					</script>';
+				echo '<script type="text/javascript">';
+				echo 'setTimeout(function () { swal("Congratulation!","New customer Added Successfully !","success");';
+				echo '}, 1000);</script>';
 			}
 
 		}
