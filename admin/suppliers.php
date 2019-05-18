@@ -2,7 +2,61 @@
 include ('..\dbh.php');
 include ('..\user.php');
 include('header.php');
+if (isset($_POST['add_to_cart'])) {
+  
+  if (isset($_SESSION['shopping_cart'])) {
+    # code...
+    $item_array_id = array_column($_SESSION['shopping_cart']  , 'item_id');
+    if (!in_array($_GET['id'], $item_array_id)) {
+      # code...
+      $count = count($_SESSION['shopping_cart']);
+      $item_array = array('item_id' => $_GET['id'], 
+                        'item_name' => $_POST['productName'],
+                        'item_price' => $_POST['productPrice'],
+                        'item_quantity' => $_POST['quantity'],
+    );
+    $_SESSION['shopping_cart'] [$count] = $item_array;
+    }
+    else{
+        // echo "<script>alert('Item Already Added ')</script>";
+        // echo '<script>window.location = "suppliers.php"</script>';
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("Sorry!!"," Item Already Added to Cart  ","error");';
+        echo '}, 1000);</script>'; 
+    }
 
+  }
+  else{
+    
+    
+    $item_array = array('item_id' => $_GET['id'], 
+                        'item_name' => $_POST['productName'],
+                        'item_price' => $_POST['productPrice'],
+                        'item_quantity' => $_POST['quantity'],
+    );
+    $_SESSION['shopping_cart'] [0] = $item_array;
+  }
+}
+
+if (isset($_GET["action"])) {
+  # code...
+  if ($_GET["action"] == "delete") {
+    # code...
+    foreach ($_SESSION['shopping_cart'] as $keys => $values) {
+      if ($values['item_id'] == $_GET['id']) {
+        # code...
+        unset($_SESSION['shopping_cart'][$keys]);
+        // echo '<script>alert("Item Removed")</script>';
+        // echo '<script>window.location="suppliers.php"</script>';
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("Successfully!!"," Item Removed from cart  ","success");';
+        echo '}, 1000);</script>'; 
+      }
+      // echo '<script>alert("Item Not Removed")</script>';
+      // //unset($_SESSION['shopping_cart']);
+    }
+  }
+}
 ?>
 <style type="text/css">
     .saveBtn{
@@ -31,7 +85,25 @@ include('header.php');
                 <!-- DOM - jQuery events table -->
                 <section id="dom">
                     <div class="row">
-                        <div class="col-md-7">
+                    <div class="col-md-12">
+                        <?php if (isset($_SESSION['errorMes'])) {
+                            echo '<script type="text/javascript">';
+                            echo 'setTimeout(function () { swal("Error!","Fails to add to sales !","error");';
+                            echo '}, 1000);</script>';
+                            unset($_SESSION['errorMes']);
+                        }
+                            
+
+                            if (isset($_SESSION['successMes'])) {
+                                echo '<script type="text/javascript">';
+                                echo 'setTimeout(function () { swal("Congratulation!","Cart Product CheckOut Successfully !","success");';
+                                echo '}, 1000);</script>';
+                                unset($_SESSION['successMes']);
+                            }
+
+                         ?>
+                    </div>
+                        <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">                                    
                                     <h4 class="card-title">
@@ -48,57 +120,48 @@ include('header.php');
                                         <div class="table-responsive">
                                            <form>
                                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                                    <div class="form-group">
-                                                        <h5>Customer Name <span class="required">*</span></h5>
-                                                        <div class="controls">
-                                                            <select class="form-control mb-1" name="productCategory" validation-required-message="Product Category is required" required>
-                                                                <option value="">-- SELECT CUSTOMER -- </option>
+                                                    <div class="table-responsive " style="margin-top: 30px;">
+                                                                <table class="table table-striped table-bordered dom-jQuery-events">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Product Name</th>
+                                                                            <th>price</th>
+                                                                            <th>Quantity</th>
+                                                                            <th>control</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php
+                                                                        $results = $object->getProduct();
+                                                                        if(!empty($results)){
+                                                                        foreach($results as $value) { 
+                                                                        ?>
+                                                                        <tr>
+                                                                            <td id="productName<?php echo $value['id'] ?>"><?=$value['productName']?></td>
+                                                                            <td id="price<?php echo $value['id'] ?>"><?=$value['productPrice']?></td>
+                                                                            <td>
+                                                                                <form method="POST" action="suppliers.php?action=add&id=<?php echo $value['id']?>">
+                                                                                <input  text="text" class="form-control" name="quantity" required />
+                                                                                <input type="hidden" name="productName" value="<?=$value['productName']?>">
+                                                                                <input type="hidden" name="productPrice" value="<?=$value['productPrice']?>">
+                                                                                
+                                                                            </td>
+                                                                            <td>
+                                                                                <button class="btn btn-sm btn-primary mr-1 mb-1" name="add_to_cart"><i class="fa fa-plus"></i>AddToCart</button></form>
+                                                                                <!--  -->
 
-                                                                <?php $results = $object->getAllCustomers(); foreach ($results as $result) {?>
-                                                                    <option id="name<?=$result['id']?>"> value="<?=$result['id']?>"><?=$result['fullName']?></option>
-                                                                <?php
-                                                                } ?>
-                                                            </select>
-                                                            <div class="table-responsive " style="margin-top: 30px;">
-                                            <table class="table table-striped table-bordered dom-jQuery-events">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Product Name</th>
-                                                        <th>price</th>
-                                                        <th>Quantity</th>
-                                                        <th>control</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    $results = $object->getProduct();
-                                                    if(!empty($results)){
-                                                    foreach($results as $value) { 
-                                                    ?>
-                                                    <tr>
-                                                        <td id="productName<?php echo $value['id'] ?>"><?=$value['productName']?></td>
-                                                        <td id="price<?php echo $value['id'] ?>"><?=$value['productPrice']?></td>
-                                                        <td id="quantity<?php echo $value['id'] ?>"></td>
-                                                        <td>
-                                                            <a title="Edit" href="#" class="btn btn-sm btn-primary mr-1 mb-1" onclick="addquantity('<?php echo $value['id'];?>');" id="editBtn<?php echo $value['id'] ?>">Add quantity</a>
-                                                            <!--  -->
+                                                                            </td>
+                                                                        </tr>
+                                                                    <?php
+                                                                     }
+                                                                    }
+                                                                    else{
 
-                                                            <a title="Edit" href="#" class="btn btn-sm btn-success mr-1 mb-1 saveBtn" onclick="addToCart('<?php echo $value['id'];?>');" id="saveBtn<?php echo $value['id'] ?>">Add to Cart</a>
+                                                                        } ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
 
-                                                        </td>
-                                                    </tr>
-                                                <?php
-                                                 }
-                                                }
-                                                else{
-
-                                                    } ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!--  -->
-                                                        </div>
-                                                    </div>
                                                 </div>
                                            </form>
                                         </div>
@@ -106,7 +169,7 @@ include('header.php');
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="card">
                                 <div class="card-header">                                    
                                     <h4 class="card-title">
@@ -120,21 +183,54 @@ include('header.php');
                                 </div>
                                 <div class="card-content collapse show">
                                     <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">                                        
-                                        
+                                        <?php
+                                        if (!empty($_SESSION['shopping_cart'])) {
+                                          ?>
                                         <table class="table table-striped table-bordered">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
                                                     <th>Product Name</th>
                                                     <th>price</th>
                                                     <th>Quantity</th>
                                                     <th>Total</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    
-                                                </tr>
+                                                <?php
+
+                                                      //
+                                                      $total = 0;
+                                                      foreach ($_SESSION['shopping_cart'] as $keys => $values) {
+                                                        # code...
+                                                      
+                                                      ?>
+                                                     <form method="post" action="process_supplier.php">
+                                                      <tr>
+                                                        <td><?php echo $values['item_name']; ?></td>
+                                                        <td><?php echo $values['item_quantity']; ?></td>
+                                                         <td><?php echo $values['item_price']; ?></td>
+                                                          <td><?php echo number_format($values['item_quantity'] * $values['item_price'] , 2); ?></td>
+                                                          <td><a href="suppliers.php?action=delete&id=<?php echo $values['item_id']; ?>"><span style="font-size: 19px;" class="text-align text-danger la la-trash" title="delete"></span></a></td>
+                                                      </tr>
+                                                      <?php
+
+                                                      $total = $total + ($values['item_quantity'] * $values['item_price']);
+                                                    }
+                                                    ?>
+                                                     <input type="hidden" name="mytotal" id="mytotal" value="<?php echo "$total";?>"/>
+                                                    <tr>
+                                                      <td colspan="3" align="right" style="font-weight: bold;">Total : </td>
+                                                      <td align="right" style="font-weight: bold;"><?php echo '#'. number_format($total,2); ?></td>
+                                                      <td  style="margin-left: -30px;"> 
+                                                      <a href="#myModal" data-toggle="modal" data-target="" class="btn btn-success la la-shopping-cart" style="width: 50px;"> 
+                                                      </td>
+                                                    </tr>
+                                                 <?php }
+                                                 // else
+                                                 //  echo "<script>alert('shopping cart empty')</script>";
+                                                  ?>
+                                                  </form>
                                             </tbody>
                                         </table>
                                     </div>
@@ -148,6 +244,51 @@ include('header.php');
         </div>
     </div>
     <!-- END: Content-->
+     <!-- Category Modal -->
+    <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"> <span class="text-info pull-right">Modal Header </span></h4>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="process_supplier.php" novalidate>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="form-group">
+                        <h5>Customer Name <span class="required">*</span></h5>
+                        <div class="controls">
+                            <select class="form-control mb-1" name="custName"  required data-validation-required-message="Customer Name required" required> >
+                                <option value="">== SELECT CUSTOMER ==</option>
+                                <?php $results = $object->getAllCustomers(); if (!empty($results)) {
+                                    foreach ($results as $result) {?>
+                                        <option value="<?=$result['id']?>"><?=$result['fullName']?></option>
+                                 <?php   }
+                                } ?>
+                            </select>
+                            <!-- <input type="text" name="catName" class="form-control mb-1" required data-validation-required-message="Category name is required" required> -->
+                        </div>
+                    </div>
+                </div>
+                
+
+            </div>
+            <div class="pull-right">
+            <button type="submit" name="addCategory" class="btn btn-success">Add</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </form>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+    <!-- end of category Modal -->
 <?php include 'footer.php'; ?>
 <script>
     $(document).ready(function(){
@@ -221,28 +362,25 @@ include('header.php');
 
 function addToCart(id)
 {
+    //alert(id);
  var quantity=document.getElementById("quantity_text"+id).value;
- var custName = document.getElementById("name"+id).value;
- var productID = document.getElementById("productName"+id);
+ //var custName = id;
+ //var productID = document.getElementById("productName"+id).value;
+ //alert(productID);
     
  $.ajax
  ({
   type:'post',
   url:'function.php',
   data:{
-   edit_product:'edit_product',
+   addCart:'addCart',
    row_id:id,
-   productName:productName,
-   productPrice:productPrice,
-   productQuantity:productQuantity,
+   quantity:quantity,
+   // productID:productID,
   },
   success:function(response) {
    if(response=="success")
    {
-    document.getElementById("productName"+id).innerHTML=productName;
-    document.getElementById("productPrice"+id).innerHTML=productPrice;
-    document.getElementById("productQuantity"+id).innerHTML=productQuantity;
-
     document.getElementById("editBtn"+id).style.visibility="visible";
     document.getElementById("saveBtn"+id).style.visibility="hidden";
     //alert('Record Updated Successfully');
@@ -252,7 +390,7 @@ function addToCart(id)
               }, 1000);
    }
    else{
-    alert('response');
+    alert(response);
    }
   }
 

@@ -30,9 +30,9 @@ if (isset($_POST['delete_product'])) {
 
 if (isset($_POST['addCart'])) {
 	$quantity = $_POST['quantity'];
-	$productID = $_POST['productID'];
-	$custName = $_POST['custName'];
-	$object = $object->cart($quantity,$productID,$custName);
+	// $productID = $_POST['productID'];
+	// $custName = $_POST['custName'];
+	$object = $object->cart($quantity);
 }
 
 ?>

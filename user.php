@@ -448,8 +448,201 @@ class user extends dbh
 		}
 	}
 
-	public function cart($quantity,$productID,$custName){
-		$smt = "insert into customer_cart(custID,prdID,quantity,date_add) Values()"
+	public function cart($quantity){
+		$stmt = "INSERT into customer_cart(quantity,custID,prdID)Values('$quantity','1','1')";
+		$result = $this->connect()->query($stmt);
+		if ($result) {
+			echo "success";
+		}
+		else{
+			echo "Error Occured!!!";
+		}
+	}
+	public function getCart($custID)
+	{
+		$stmt = "SELECT * from customer_cart where custID = '$custID'";
+		$result = $this->connect()->query($stmt);
+		if ($result->num_rows > 0) {
+			while ($rows = $result->fetch_assoc()) {
+				$data[] = $rows;
+			}
+			return $data;
+		}
+		else{
+			return '';
+		}
+	}
+
+	public function getCartProduct($id){
+		$stmt = "SELECT * from product where id = '$id'";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows > 0) {
+			$data = $result->fetch_assoc();
+			return $data;
+		}
+		else{
+			return '';
+		}
+	}
+
+	public function storetoCart($id,$quantitys,$date,$custid)
+	{
+		$smtm = "INSERT INTO customer_cart(prdID,quantity,date_add,custID) VALUES('$id','$quantitys','$date','$custid') ";
+      	$result = $this->connect()->query($smtm);
+      	if ($result) {
+      
+      	}
+      	else{
+        $_SESSION['errorMes'] = 'Error Ocurred';
+        header('location:suppliers.php');
+      }
+	}
+
+	public function sales(){
+		$stmt = "SELECT * FROM customer_cart";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows >0) {
+			$counter = 1;
+			while ($rows= $result->fetch_assoc()) {
+				// $data[] = $rows;
+				if (substr($rows['date_add'], 8,2) == date('d')) {
+					
+					$data[] = $rows;
+				}
+				else{
+
+				}
+			}
+			return $data;
+			
+		}
+	}
+
+	public function saless($report){
+			if ($report =='daily') {
+				// daily code
+				return $this->sales();
+
+			}
+			elseif ($report =='weekly') {
+				// weekly code
+				$stmt = "SELECT * FROM customer_cart";
+				$result = $this->connect()->query($stmt);
+				$numberrows = $result->num_rows;
+				if ($numberrows >0) {
+					$counter = 1;
+					while ($rows= $result->fetch_assoc()) {
+						// $data[] = $rows;
+						if ($this->weekOfMonth($rows['date_add']) == $this->weekOfMonth(date('Y-m-d'))) {
+							
+							$data[] = $rows;
+						}
+						else{
+
+						}
+					}
+					return $data;
+					
+				}
+
+			}
+			elseif ($report == 'monthly') {
+				//monthly code...
+				$stmt = "SELECT * FROM customer_cart";
+				$result = $this->connect()->query($stmt);
+				$numberrows = $result->num_rows;
+				if ($numberrows >0) {
+					$counter = 1;
+					while ($rows= $result->fetch_assoc()) {
+						// $data[] = $rows;
+						if (substr($rows['date_add'], 5,2) == date('m') && substr($rows['date_add'], 0,4) == date('Y')) {
+							
+							$data[] = $rows;
+						}
+						else{
+
+						}
+					}
+					return $data;
+					
+				}
+			}
+			else{
+				$date = date('Y-m-d');
+				$stmt = "SELECT * FROM customer_cart where date_add = '$date'";
+				$result = $this->connect()->query($stmt);
+				$numberrows = $result->num_rows;
+				if ($numberrows >0) {
+					$counter = 1;
+					while ($rows= $result->fetch_assoc()) {
+						$data[] = $rows;
+					}
+					return $data;
+					
+				}
+			}
+	}
+
+	  function weekOfMonth($qDate) {
+	    $dt = strtotime($qDate);
+	    $day  = date('j',$dt);
+	    $month = date('m',$dt);
+	    $year = date('Y',$dt);
+	    $totalDays = date('t',$dt);
+	    $weekCnt = 1;
+	    $retWeek = 0;
+	    for($i=1;$i<=$totalDays;$i++) {
+	        $curDay = date("N", mktime(0,0,0,$month,$i,$year));
+	        if($curDay==7) {
+	            if($i==$day) {
+	                $retWeek = $weekCnt+1;
+	            }
+	            $weekCnt++;
+	        } else {
+	            if($i==$day) {
+	                $retWeek = $weekCnt;
+	            }
+	        }
+	    }
+	    return $retWeek;
+}
+
+	public function getCustomerName($id){
+		$stmt = "SELECT fullName from customers where id = '$id'";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows > 0) {
+			$data = $result->fetch_assoc();
+			$string = implode('|',$data);
+			return $string;
+		}
+		else{
+			return '';
+		}
+	}
+
+	public function getProductName($id){
+		$stmt = "SELECT productName from product where id = '$id'";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows > 0) {
+			$data = $result->fetch_assoc();
+			$string = implode('|',$data);
+			return $string;
+		}
+		else{
+			return '';
+		}
+	}
+
+	public function getTotal($prodID,$quantity)
+	{
+		$prod = $this->getCartProduct($prodID);
+		$productPrice = $prod['productPrice'];
+		$sum = $productPrice * $quantity;
+		return $sum;
 	}
 
 

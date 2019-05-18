@@ -114,7 +114,7 @@
                 <li class="nav-item"><a class="dropdown-toggle nav-link" href="product.php"><i class="la la-archive"></i><span>Product</span></a>
                 </li>
                 
-                <li class="nav-item"><a class="dropdown-toggle nav-link" href="sales"><i class="la la-rupee"></i><span>Sales</span></a>
+                <li class="nav-item"><a class="dropdown-toggle nav-link" href="sales.php"><i class="la la-rupee"></i><span>Sales</span></a>
                 </li>
                 <li class="nav-item"><a class="dropdown-toggle nav-link" href="suppliers.php"><i class="la la-truck"></i><span>Suppliers</span></a>
                 </li>
