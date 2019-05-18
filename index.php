@@ -45,6 +45,7 @@ include('user.php');
     <!-- css files -->
     <link href="assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" media="all">
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="assets/admin/css/bootstrap.css">
     <!-- //css files -->
     
     <!-- google fonts -->
@@ -107,7 +108,7 @@ include('user.php');
                         <span class="fa fa-lock" aria-hidden="true"></span>
                         <input type="password" name="password" placeholder="Enter Password" required="">
                     </div>                     
-                        <button class="btn btn-danger btn-block" type="submit" name="login_btn">Login</button >                
+                        <button class="btn btn-success btn-block text-white" type="submit" name="login_btn">Login</button >                
                 </form>
             </div>
         </div>

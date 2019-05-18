@@ -63,7 +63,7 @@ body * { visibility: hidden; }
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="card-content collapse show" id="printMe">
+                                <div class="card-content collapse show div2" id="printMe">
                                     <div class="card-body card-dashboard dataTables_wrapper dt-bootstrap">                                        
                                         
                                         <div class="table-responsive">

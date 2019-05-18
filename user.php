@@ -23,44 +23,9 @@ class user extends dbh
 			$error = 0;
 			header('location:admin/index.php');
 		}
-		else
-		{
-			$sql = "SELECT * FROM user_tb where email = '$username' AND password = '$password'";
-			$result = $this->connect()->query($sql);
-			$numberrows = $result->num_rows;
-			if ($numberrows > 0) 
-			{
-				$rows= $result->fetch_assoc();
-				$userType = $rows['usertype'];
-				if($userType == 'staff')
-				{
-					$_SESSION['user'] = $username;
-					$_SESSION['usertype'] = $userType;
-					$error = 0;
-					header('location:staff/home.php');
-				}
-				elseif($userType == 'student')
-				{
-					$_SESSION['user'] = $username;
-					$_SESSION['usertype'] = $userType;
-					$error = 0;
-					header('location:student/home.php');
-				}
-				else{
-					$error = 1;
-					$oldmail = $username;
-					//return $oldmail;
-					echo  $this->messages($error);	
-				}
-				
-			}
-			else{
-				$error = 1;
-				$oldmail = $username;
-				//return $oldmail;
-				echo  $this->messages($error);	
-			}
-			
+		else{
+			$error = 1;
+			echo  $this->messages($error);
 		}
 		
 	}

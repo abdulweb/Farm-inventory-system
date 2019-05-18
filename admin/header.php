@@ -91,7 +91,7 @@
                             <!-- <img src="../assets/admin/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i> -->
                             </span></a>
                             <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="account"><i class="ft-user"></i> Edit Profile</a>
-                                <div class="dropdown-divider"></div><a class="dropdown-item" href="../logout"><i class="ft-power"></i> Logout</a>
+                                <div class="dropdown-divider"></div><a class="dropdown-item" href="../index.php"><i class="ft-power"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -120,11 +120,8 @@
                 </li>
                 <li class="nav-item"><a class="dropdown-toggle nav-link" href="customers.php"><i class="la la-users"></i><span>Customers</span></a>
                 </li>
-                <li class="nav-item"><a class="dropdown-toggle nav-link" href="users"><i class="la la-user-plus"></i><span>Users</span></a>
+                <li class="nav-item"><a class="dropdown-toggle nav-link" href="setting.php"><i class="la la-users"></i><span>Setting</span></a>
                 </li>
-                
-                
-                 ?>
 
             </ul>
         </div>
