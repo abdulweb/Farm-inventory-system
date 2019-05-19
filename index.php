@@ -25,7 +25,7 @@ include('user.php');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title><?=$title?></title>
+<title>Farm Inventroy System</title>
 <link rel="shortcut icon" type="image/x-icon" href="assets/uploads/settings/<?=$fevicon?>">
  <!-- Meta-Tags -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -81,6 +81,8 @@ include('user.php');
                 <div class="left_grid_info">
                     <h1>Manage Your Farm Product</h1>
                     <p>Simple Farm Inventroy Management System </p>
+                    <small>Kindly Upload your farm image here</small>
+                    <!-- <img src="assets/uploads/settings/farm_img.jpg" class=""> -->
                     
                 </div>
             </div>

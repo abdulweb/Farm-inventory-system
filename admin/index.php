@@ -28,11 +28,11 @@ include('header.php');
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h3>86%</h3>
+                                        <h3><?=count($object->getProduct())?>%</h3> <br>
                                         <h6 class="card-subtitle">Total Product</h6></div>
                                     <div class="col-12">
                                         <div class="progress">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="progress-bar bg-danger " role="progressbar" style="width: <?=count($object->getProduct())*0.1?>%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -40,6 +40,57 @@ include('header.php');
                         </div>
                     </div>
                     <!-- Column -->
+
+                    <!-- Column -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h3>
+                                          <?php 
+                                          $results = $object->customerCart();
+                                          if(!empty($results)){
+                                            $total =0;
+                                            foreach($results as $value) {
+                                               $total = $total + $object->getTotal($value['prdID'],$value['quantity']);
+                                             }
+                                             echo $total;
+                                           }
+                                          ?>
+                                        </h3> <br>
+                                        <h6 class="card-subtitle">Sales</h6></div>
+                                    <div class="col-12">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success " role="progressbar" style="width: 45%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+
+                    <!-- Column -->
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h3><?=count($object->getAllCustomers())?>%</h3> <br>
+                                        <h6 class="card-subtitle">Customers</h6></div>
+                                    <div class="col-12">
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width: <?=count($object->getAllCustomers())*0.1?>%; height: 6px;" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+
+
                     </div>
                 </section>
                 <!-- Input Validation end -->

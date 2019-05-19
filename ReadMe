@@ -1,0 +1,28 @@
+=====> How To Install The System =======>
+
+	-----> On System Runing Window OS ---->
+step 1: Download any local server either xampp or wamp
+
+Step 2: start your server then visist phpmyadmin in order to access database
+
+Step 3: Create a database with name  farm_store
+
+Step 3: change the database credential to your own in dbh.php file
+
+Step 4 : visit localhost/farm-store
+
+Step 5: Login with this credientials, username = admin@admin.com and password = pass3word
+
+
+-----> On System Runing Window OS ---->
+step 1: Download any local server laragon (ngix) in particular
+
+Step 2: Create a database with name farm_store
+
+Step 3: then import the database file by using this command  mysql -u databaseUsername -p database name < filename.sql
+
+Step 4: change the database credential to your own in dbh.php file
+
+Step 5 : visit localhost/farm-store
+
+Step 6: Login with this credientials, username = admin@admin.com and password = pass3word
