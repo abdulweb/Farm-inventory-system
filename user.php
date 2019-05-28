@@ -461,6 +461,22 @@ class user extends dbh
 		}
 	}
 
+	public function getCustomerdeatils($id){
+		$stmt = "SELECT * from customers where id = '$id'";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows > 0) {
+			//$data = $result->fetch_assoc();
+			while ($data = $result->fetch_assoc()) {
+				$datas [] = $data;
+			}
+			return $datas;
+		}
+		else{
+			return '';
+		}
+	}
+
 	public function getProductName($id){
 		$stmt = "SELECT productName from product where id = '$id'";
 		$result = $this->connect()->query($stmt);
@@ -500,178 +516,6 @@ class user extends dbh
 
 
 /* ===================================================================*/
-
-	public function getclassName($id){
-		$stmt =  "SELECT * from classes where id ='$id'";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		$rows = $result->fetch_assoc(); 
-		$className = $rows['class_name'];
-		//echo $numberrows;
-		return $className;
-	}
-
-	public function getstudentNumber($id){
-		$stmt =  "SELECT * from students where student_class ='$id'";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		return $numberrows;
-	}
-
-	
-	public function getstudent(){
-		$stmt = "SELECT * FROM students";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			$counter = 1;
-			while ($rows= $result->fetch_assoc()) {
-				echo '<tr>
-                    <td>'.$counter.'</td>
-                    <td>'.$rows['student_fname']. " ". $rows['student_oname'].'</td>
-                    <td>'.$this->getclassName($rows['student_class']).'</td>
-                    <td>'. ''.'</td>
-                </tr>';
-                $counter++;
-			}
-			
-		}
-	}
-
-	public function insertSubject($name, $datet)
-	{
-		if (empty($this->checksubject(($name)))) 
-		{
-			$upname = ucwords($name);
-			$insert = "INSERT INTO subjects(subject_name, date_create) Values('$upname','$datet')";
-			$stmt = $this->connect()->query($insert);
-			if (!$stmt) {
-				echo '<div class ="alert alert-danger"> <strong> Error Occured !!! Please Try Again </strong> </div>';
-			}
-			else
-			{
-				echo '<div class ="alert alert-success"> <strong> New Subject Added Successfully </strong> </div>';
-			}
-
-		}
-		else{
-			echo $this->checksubject($name);
-		}
-		
-	}
-
-	public function checksubject($name)
-	{
-		$upname = ucwords($name);
-		$stmt = "SELECT * FROM subjects where subject_name = '$upname'";
-		$result = $this->connect()->query($stmt); 
-		if (($result->num_rows)> 0) {
-			return '<div class ="alert alert-danger"> <strong> Sorry !!! Subject Name Already Exist </strong> </div>';
-			 
-		}
-		else{
-
-		}
-	}
-
-	public function getAllSubject()
-	{
-		$stmt = "SELECT * FROM subjects";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			$counter = 1;
-			while ($rows= $result->fetch_assoc()) {
-				echo '<tr>
-                    <td>'.$counter.'</td>
-                    <td>'.$rows['subject_name'].'</td>
-                    <td><button class="btn btn-danger">Delete</button></td>
-                </tr>';
-                $counter++;
-			}
-			
-		}
-	}
-
-	public function getsubjectoption()
-	{
-		$stmt = "SELECT * FROM subjects";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			$counter = 1;
-			while ($rows= $result->fetch_assoc()) {?>
-				<option value= "<?=$rows['id'] ?>"> <?=$rows['subject_name']?></option>
-			<?php
-		}
-			
-		}
-	}
-
-	public function getstudentname($classid)
-	{
-		$stmt = "SELECT * FROM students where student_class = '$classid' ";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		if ($numberrows >0) {
-			$counter = 1;
-			while ($rows= $result->fetch_assoc()) {
-				
-                $studentName [] = $rows;
-			}
-			return $studentName;
-			
-		}
-	}
-
-	public function getAllstudentNumber(){
-		$stmt = "SELECT * FROM students ";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		return $numberrows;
-	}
-
-	public function getAllclassroomnumber(){
-		$stmt = "SELECT * FROM classes ";
-		$result = $this->connect()->query($stmt);
-		$numberrows = $result->num_rows;
-		return $numberrows;
-	}
-
-	public function tests($ftest,$stest,$total,$subjectid,$studentid){
-		if ($this->checktest($studentid) > 0) {
-			$update = "UPDATE tests set first_test ='$ftest',second_test ='$stest',total ='$total' ";
-			$update_query = $this->connect()->query($update);
-			if ($update) {
-				echo '<div class="alert alert-success"> Test Record Update Successfully</div>';
-			}
-			else
-			{
-				echo '<div class="alert alert-danger"> Sorry Error Occured!!! Please Retry</div>';
-			}
-		}
-		else
-		{
-			$stmt = "INSERT INTO tests(first_test,second_test,total,subject_id,student_id) values('$ftest','$stest','$total','$subjectid','$studentid')";
-			$result = $this->connect()->query($stmt);
-			if (!result) {
-				echo '<div class="alert alert-danger"> Sorry Error Occured!!! Please Refill</div>';
-			}
-			else{
-				echo '<div class="alert alert-success"> Test Record add Successfully</div>';
-			}
-		}
-		
-	}
-	public function checktest($studentid){
-		$update_select = "SELECT * FROM tests where student_id ='$studentid'";
-		$resu = $this->connect()->query($update_select);
-		$numb = $resu->num_rows;
-		return $numb;
-	}
-
-
-
 }
 // end of class
 $object = new user();
