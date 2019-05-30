@@ -8,8 +8,14 @@ if (empty($_SESSION['shopping_cart'])) {
   echo "<script>alert('shopping_cart is empty')</script>";
 }
 
-  $_SESSION['customer'] = $_POST['custName'];
+ 
+  $custName = $_POST['custName'];
+  $custNumber = $_POST['custNumber'];
+  $custAddress = $_POST['custAddress'];
   $date = date('Y-m-d');
+  $transcationID =substr(md5($custNumber.$custName.time()),0,9);
+
+  $_SESSION['customer'] = $transcationID;
   //insert into db
     foreach ($_SESSION['shopping_cart'] as $keys => $values) {
       $id = $values['item_id'];
@@ -29,7 +35,7 @@ if (empty($_SESSION['shopping_cart'])) {
           </tr>
       <?php
 
-     $object->storetoCart($id,$quantitys,$date,$custid);
+     $object->storetoCart($id,$quantitys,$date,$custName,$custNumber,$custAddress,$transcationID);
       
     }
     // unset($_SESSION['shopping_cart']);

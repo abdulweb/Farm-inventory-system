@@ -7,7 +7,19 @@ if (isset($_POST['add_to_cart'])) {
   if (isset($_SESSION['shopping_cart'])) {
     # code...
     $item_array_id = array_column($_SESSION['shopping_cart']  , 'item_id');
-    if (!in_array($_GET['id'], $item_array_id)) {
+    $checkitem = $object->checkProductQuantity($_GET['id']);
+    if ($_POST['quantity'] > $checkitem) {
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("Sorry!!"," Item Available is not up to demand ","error");';
+        echo '}, 1000);</script>';
+    }
+    elseif($_POST['quantity'] < 1)
+    {
+      echo '<script type="text/javascript">';
+        echo 'setTimeout(function () { swal("Sorry!!"," Item Must Be a in Positive Integer and More than 0 ","error");';
+        echo '}, 1000);</script>';
+    }
+    elseif (!in_array($_GET['id'], $item_array_id)) {
       # code...
       $count = count($_SESSION['shopping_cart']);
       $item_array = array('item_id' => $_GET['id'], 
@@ -125,8 +137,8 @@ if (isset($_GET["action"])) {
                                                                     <thead>
                                                                         <tr>
                                                                             <th>Product Name</th>
-                                                                            <th>price</th>
                                                                             <th>Quantity</th>
+                                                                            <th>price</th>
                                                                             <th>control</th>
                                                                         </tr>
                                                                     </thead>
@@ -138,7 +150,6 @@ if (isset($_GET["action"])) {
                                                                         ?>
                                                                         <tr>
                                                                             <td id="productName<?php echo $value['id'] ?>"><?=$value['productName']?></td>
-                                                                            <td id="price<?php echo $value['id'] ?>"><?=$value['productPrice']?></td>
                                                                             <td>
                                                                                 <form method="POST" action="suppliers.php?action=add&id=<?php echo $value['id']?>">
                                                                                 <input  text="text" class="form-control" name="quantity" required />
@@ -146,6 +157,7 @@ if (isset($_GET["action"])) {
                                                                                 <input type="hidden" name="productPrice" value="<?=$value['productPrice']?>">
                                                                                 
                                                                             </td>
+                                                                            <td id="price<?php echo $value['id'] ?>"><?=$value['productPrice']?></td>
                                                                             <td>
                                                                                 <button class="btn btn-sm btn-primary mr-1 mb-1" name="add_to_cart"><i class="fa fa-plus"></i>AddToCart</button></form>
                                                                                 <!--  -->
@@ -190,8 +202,8 @@ if (isset($_GET["action"])) {
                                             <thead>
                                                 <tr>
                                                     <th>Product Name</th>
-                                                    <th>price</th>
                                                     <th>Quantity</th>
+                                                    <th>price</th>
                                                     <th>Total</th>
                                                     <th></th>
                                                 </tr>
@@ -262,15 +274,19 @@ if (isset($_GET["action"])) {
                     <div class="form-group">
                         <h5>Customer Name <span class="required">*</span></h5>
                         <div class="controls">
-                            <select class="form-control mb-1" name="custName"  required data-validation-required-message="Customer Name required" required> >
-                                <option value="">== SELECT CUSTOMER ==</option>
-                                <?php $results = $object->getAllCustomers(); if (!empty($results)) {
-                                    foreach ($results as $result) {?>
-                                        <option value="<?=$result['id']?>"><?=$result['fullName']?></option>
-                                 <?php   }
-                                } ?>
-                            </select>
-                            <!-- <input type="text" name="catName" class="form-control mb-1" required data-validation-required-message="Category name is required" required> -->
+                           <input class="form-control mb-1" type="text" name="custName" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h5>Customer Mobile Phone <span class="required">*</span></h5>
+                        <div class="controls">
+                           <input class="form-control mb-1" type="number" name="custNumber" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h5>Customer Address <span class="required">*</span></h5>
+                        <div class="controls">
+                           <textarea class="form-control mb-1" name="custAddress" required></textarea>
                         </div>
                     </div>
                 </div>

@@ -41,24 +41,12 @@ body * { visibility: hidden; }
                 <!-- DOM - jQuery events table -->
                 <section id="dom">
                     <div class="row">
-                        <div class="col-md-12" style="margin-bottom: 5px">
-                            <form action="" method="post">
-                                <select class="form-control mb-1" name="report">
-                                    <option value="daily">Daily</option>
-                                    <option value="weekly">Weekly</option>
-                                    <option value="monthly">Monthly</option>
-                                    <option value="year">Year</option>
-                                </select>
-                                <button type="submit" name="fetch_report" class="btn btn-info pull-right " style="margin: 5px;"><i class="la la-arrow-down"> </i> fetch</button>
-                            </form>
-                        </div>
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header"><h4 >Sales Report</h4>                                 
                                     <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                                     <div class="heading-elements">
                                         <ul class="list-inline mb-0">
-                                            <li> <button class="btn btn-success" onclick="printDiv('printMe')">Generate Report</button></li>
                                             <li><a data-action="expand"><i class="ft-maximize"></i></a></li>
                                         </ul>
                                     </div>
@@ -72,66 +60,39 @@ body * { visibility: hidden; }
                                                     <tr>
                                                         <th>#</th>
                                                         <th>Customer Name</th>
-                                                        <th>Product Name</th>
-                                                        <th>Product Quantity</th>
-                                                        <th>Amount</th>
+                                                        <th>Transaction ID</th>
                                                         <th>Created Date</th>
-                                                        <!-- <th>Control</th> -->
+                                                        <th>Control</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                 <?php
-                                                    if (isset($_POST['fetch_report'])) {
-                                                        $report = $_POST['report'];
-                                                        $results = $object->saless($report);
+                                                    
+                                                        $results = $object->salesReport();
                                                         if(!empty($results)){
                                                         $i=1;
                                                         foreach($results as $value) { 
+                                                            if (empty($value['customerName'])) {
+                                                                
+                                                            }
+                                                            else{
                                                         ?>
                                                         <tr>
                                                             <td><?=$i?></td>
                                                             <td id="name<?php echo $value['id'] ?>"><?=$value['customerName']?></td>
-                                                            <td id="name<?php echo $value['id'] ?>"><?=$object->getProductName($value['prdID'])?></td>
-                                                            <td id="name<?php echo $value['id'] ?>"><?=$value['quantity']?></td>
-                                                            <td><?=number_format($object->getTotal($value['prdID'],$value['quantity']),2)?></td>
+                                                            <td id="name<?php echo $value['id'] ?>"><?=$value['transcationID']?></td>
                                                             <td><?=$value['date_add']?></td>
-                                                            <td>
-                                                                <button type="button" class="btn btn-icon btn-primary mr-1 mb-1 cancel-button" id="<?=$value['id']?>"><i class="la la-print"></i></button>
-
+                                                            <td >
+                                                                <a title="view reciept" href="viewReciept.php?id=<?php echo htmlentities($value['transcationID']);?>" class="btn btn-icon btn-info mr-1 mb-1 "><i class="la la-eye"></i></a>
                                                             </td>
+
                                                         </tr>
                                                         <?php $i++; }
+                                                    }
                                                         }
                                                         else{
 
                                                             }
-
-                                                    }
-                                                    else
-                                                    {
-                                                        $results = $object->sales();
-                                                        if(!empty($results)){
-                                                        $i=1;
-                                                        foreach($results as $value) { 
-                                                        ?>
-                                                        <tr>
-                                                            <td><?=$i?></td>
-                                                            <td id="name<?php echo $value['id'] ?>"><?=$value['customerName']?></td>
-                                                            <td id="name<?php echo $value['id'] ?>"><?=$object->getProductName($value['prdID'])?></td>
-                                                            <td id="name<?php echo $value['id'] ?>"><?=$value['quantity']?></td>
-                                                            <td><?=number_format($object->getTotal($value['prdID'],$value['quantity']),2)?></td>
-                                                            <td><?=$value['date_add']?></td>
-                                                            <!-- <td>
-                                                                <button type="button" class="btn btn-icon btn-primary mr-1 mb-1 " id="<?=$value['id']?>"><i class="la la-print"></i></button>
-
-                                                            </td> -->
-                                                        </tr>
-                                                        <?php $i++; }
-                                                        }
-                                                        else{
-
-                                                            }
-                                                    }
                                                      ?>
                                                    
                                                 </tbody>

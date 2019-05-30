@@ -1,22 +1,3 @@
-
-<?php
-// $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-// $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-// try 
-//     {   
-//         $stmt = $conn->prepare("SELECT * FROM settings");
-//         $stmt->execute();
-//         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-//         $title=$result['title'];
-//         $footer=$result['footer'];
-//         $fevicon=$result['fevicon'];
-//         $logo=$result['logo'];
-                          
-//     }catch(PDOException $e)
-//     {
-//     echo "Connection failed: " . $e->getMessage();
-//     } 
-?>
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
@@ -29,7 +10,7 @@
     <meta name="keywords" content="">
     <meta name="author" content="">
     <title>Farm Inventory System</title>
-    <link rel="shortcut icon" type="image/x-icon" href="../assets/uploads/settings/<?=$fevicon?>">
+    <link rel="shortcut icon" type="image/x-icon" href="">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i%7CQuicksand:300,400,500,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -116,11 +97,13 @@
                 
                 <li class="nav-item"><a class="dropdown-toggle nav-link" href="sales.php"><i class="la la-rupee"></i><span>Sales</span></a>
                 </li>
-                <li class="nav-item"><a class="dropdown-toggle nav-link" href="suppliers.php"><i class="la la-truck"></i><span>Suppliers</span></a>
+                <li class="nav-item"><a class="dropdown-toggle nav-link" href="suppliers.php"><i class="la la-truck"></i><span>Sell Items</span></a>
                 </li>
                 <li class="nav-item"><a class="dropdown-toggle nav-link" href="customers.php"><i class="la la-users"></i><span>Customers</span></a>
                 </li>
                 <li class="nav-item"><a class="dropdown-toggle nav-link" href="setting.php"><i class="la la-users"></i><span>Setting</span></a>
+                </li>
+                <li class="nav-item"><a class="dropdown-toggle nav-link" href="salesReport.php"><i class="la la-users"></i><span>Sales Report</span></a>
                 </li>
 
             </ul>

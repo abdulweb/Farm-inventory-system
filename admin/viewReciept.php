@@ -20,6 +20,12 @@ body * { visibility: hidden; }
 .div2 { position: absolute; top: 40px; left: 30px; }
 }
 </style>
+<?php if ($_GET['id'] == '' || empty($_GET['id']) || $_GET['id'] == null) {
+   header('location:salesReport.php');
+}
+else{
+    $getId = $_GET['id'];
+     ?>
 <!-- BEGIN: Content-->
     <div class="app-content content">
         <div class="content-wrapper">
@@ -54,7 +60,7 @@ body * { visibility: hidden; }
                                                 <small></small>
                                             </div>
                                             <div class="col-md-6">
-                                                <h4 class="pull-right m-r-10 font-bold">Invoice Number <br><small class="font-bold"><?=$_SESSION['customer']?></small></h4>
+                                                <h4 class="pull-right m-r-10 font-bold">Invoice Number <br><small class="font-bold"><?=$getId;?></small></h4>
 
                                             </div><br>
 
@@ -67,27 +73,27 @@ body * { visibility: hidden; }
                                             <div class="col-md-2"></div>
                                             <div class="col-md-4">
                                                 <h5>Customer Details</h5>
-                                                <?php if (!empty($_SESSION['customer'])) {
-                                                    $res = $object->getCustomerdeatils($_SESSION['customer']);
-                                                    foreach ($res as $ress) {
-                                                    ?>
-                                                <h5 class="text-italic">Name: <small><?=$ress['customerName']?></small></h5>
-                                                <h5 class="text-italic">Contact: <small><?=$ress['customerNumber']?></small></h5>
-                                                <h5 class="text-italic">Address: <small><?=$ress['customerAddress']?></small></h5>
                                                 <?php 
-                                                    }
-                                                }  ?>
+                                                    $res = $object->getParticularCustomer($getId);
+                                                    if (!empty($res)) {
+                                                    ?>
+                                                <h5 class="text-italic">Name: <small><?=$res['customerName']?></small></h5>
+                                                <h5 class="text-italic">Contact: <small><?=$res['customerNumber']?></small></h5>
+                                                <h5 class="text-italic">Address: <small><?=$res['customerAddress']?></small></h5>
+                                                
                                                 </div>
 
                                             <!-- </div> -->
                                             <div class="col-md-3 ">
-                                                <h5 class="pull-right">ordered date: <br> <small><?=date('Y-m-d')?> </small> </h5> 
+                                                <h5 class="pull-right">ordered date: <br> <small><?=$res['date_add']?> </small> </h5> 
                                             </div>
+                                            <?php 
+                                                }  ?>
 
                                             <!-- <div class="col-md-12"> -->
                                         <div class="table-responsive">
                                         <?php
-                                        if (!empty($_SESSION['shopping_cart'])) {
+                                        
                                           ?>
                                             <table class="table m-t-30">
                                                 <thead>
@@ -100,27 +106,22 @@ body * { visibility: hidden; }
                                                 <tbody>
                                                 <?php
                                                       $total = 0; $counter =1;
-                                                      foreach ($_SESSION['shopping_cart'] as $keys => $values) {
+                                                       $productCarts = $object->getCustomerdeatils($getId);
+                                                      foreach ($productCarts as $productCart) {
                                                       ?>
                                                     <tr>
                                                         <td><?=$counter?></td>
-                                                        <td><?php echo $values['item_name']; ?></td>
-                                                        <td><?php echo $values['item_quantity']; ?></td>
-                                                        <td><?php echo $values['item_price']; ?></td>
-                                                        <td><?php echo number_format($values['item_quantity'] * $values['item_price'] , 2); ?></td>
+                                                        <td><?php echo $productCart['prdID']; ?></td>
+                                                        <td><?php echo $productCart['quantity']; ?></td>
+                                                        <td><?php echo $object->getProductPrice($productCart['prdID']); ?></td>
+                                                        <td><?php echo number_format($productCart['quantity'] *$object->getProductPrice($productCart['prdID']) , 2); ?></td>
                                                     </tr>
                                                     <?php
-                                                      $total = $total + ($values['item_quantity'] * $values['item_price']);
+                                                      $total = $total + ($productCart['quantity'] *$object->getProductPrice($productCart['prdID']));
                                                     $counter++;}
                                                     ?>
                                                 </tbody>
                                             </table>
-                                            <?php 
-                                                }
-                                                else{
-                                                    header('location:suppliers.php');
-                                                }
-                                             ?>
                                         </div>
 
                                         <div class="col-md-9"></div>
@@ -149,15 +150,16 @@ body * { visibility: hidden; }
         </div>
     </div>
     <!-- END: Content-->
+    <?php } ?>
    
 <?php include 'footer.php';
 //unset($_SESSION['shopping_cart']);unset($_SESSION['customer']); ?>
 <script>
-        function printDiv(divName){
-            var printContents = document.getElementById(divName).innerHTML;
-            var originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-        }
-    </script>
+    function printDiv(divName){
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>

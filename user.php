@@ -311,11 +311,13 @@ class user extends dbh
 		}
 	}
 
-	public function getCartProduct($id){
+	public function getCartProduct($id)
+	{
 		$stmt = "SELECT * from product where id = '$id'";
 		$result = $this->connect()->query($stmt);
 		$numberrows = $result->num_rows;
-		if ($numberrows > 0) {
+		if ($numberrows > 0) 
+		{
 			$data = $result->fetch_assoc();
 			return $data;
 		}
@@ -324,12 +326,19 @@ class user extends dbh
 		}
 	}
 
-	public function storetoCart($id,$quantitys,$date,$custid)
+	public function storetoCart($id,$quantitys,$date,$custName,$custNumber,$custAddress,$transcationID)
 	{
-		$smtm = "INSERT INTO customer_cart(prdID,quantity,date_add,custID) VALUES('$id','$quantitys','$date','$custid') ";
+		$smtm = "INSERT INTO customer_cart(prdID,quantity,date_add,customerName,customerNumber,customerAddress,transcationID) VALUES('$id','$quantitys','$date','$custName','$custNumber','$custAddress','$transcationID') ";
       	$result = $this->connect()->query($smtm);
-      	if ($result) {
-      
+      	if ($result) 
+      	{
+      		$stmt = "SELECT * from product where id = '$id'";
+      		$checkresult = $this->connect()->query($stmt);
+      		$fetech_data = $checkresult->fetch_assoc();
+      		$productid =   $fetech_data['id'];
+      		$newQuantity = ($fetech_data['quantity']) - ($quantitys);
+      		$newUpdate = $this->connect()->query("UPDATE product set quantity = '$newQuantity' where id = $productid");
+
       	}
       	else{
         $_SESSION['errorMes'] = 'Error Ocurred';
@@ -462,7 +471,7 @@ class user extends dbh
 	}
 
 	public function getCustomerdeatils($id){
-		$stmt = "SELECT * from customers where id = '$id'";
+		$stmt = "SELECT * from customer_cart where transcationID = '$id'";
 		$result = $this->connect()->query($stmt);
 		$numberrows = $result->num_rows;
 		if ($numberrows > 0) {
@@ -513,6 +522,75 @@ class user extends dbh
 				}
 	}
 
+	public function checkProductQuantity($id){
+		$stmt = "SELECT quantity from product where id = '$id'";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows > 0) {
+			$data = $result->fetch_assoc();
+			$string = implode('|',$data);
+			return $string;
+		}
+		
+		else{
+			return '';
+		}
+	}
+
+	public function salesReport(){
+		$stmt = "SELECT DISTINCT transcationID,customerName,date_add,id from customer_cart WHERE transcationID IS NOT NULL ORDER BY id";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows > 0) {
+			while($data = $result->fetch_assoc())
+			{
+				$datas [] = $data;
+			}
+			$get =  $datas;
+			foreach ($get as $uniquedata) {
+				if(!in_array($uniquedata, $get)){
+					$newarray [] = $uniquedata;
+				}
+				else{
+					
+				}
+			}
+			return $newarray;
+			
+		}
+		
+		else{
+			return '';
+		}
+	}
+
+	public function getProductPrice($id)
+	{
+		$stmt = "SELECT productPrice FROM product where id = '$id'";
+		$result= $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows > 0) {
+			$data = $result->fetch_assoc();
+			$string = implode('|',$data);
+			return $string;
+		}
+		else{
+
+		}
+	}
+
+	public function getParticularCustomer($id){
+		$stmt = "SELECT * from customer_cart where transcationID = '$id'";
+		$result = $this->connect()->query($stmt);
+		$numberrows = $result->num_rows;
+		if ($numberrows > 0) {
+			$data = $result->fetch_assoc();
+			return $data;
+		}
+		else{
+			return '';
+		}
+	}
 
 
 /* ===================================================================*/
