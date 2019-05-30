@@ -1,7 +1,9 @@
 <?php
+
 include ('..\dbh.php');
 include ('..\user.php');
 include('header.php');
+//unset($_SESSION['shopping_cart']);
 if (isset($_POST['add_to_cart'])) {
   
   if (isset($_SESSION['shopping_cart'])) {

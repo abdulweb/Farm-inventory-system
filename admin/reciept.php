@@ -69,13 +69,11 @@ body * { visibility: hidden; }
                                                 <h5>Customer Details</h5>
                                                 <?php if (!empty($_SESSION['customer'])) {
                                                     $res = $object->getCustomerdeatils($_SESSION['customer']);
-                                                    foreach ($res as $ress) {
                                                     ?>
-                                                <h5 class="text-italic">Name: <small><?=$ress['customerName']?></small></h5>
-                                                <h5 class="text-italic">Contact: <small><?=$ress['customerNumber']?></small></h5>
-                                                <h5 class="text-italic">Address: <small><?=$ress['customerAddress']?></small></h5>
+                                                <h5 class="text-italic">Name: <small><?=$_SESSION['custName']?></small></h5>
+                                                <h5 class="text-italic">Contact: <small><?=$_SESSION['custNumber']?></small></h5>
+                                                <h5 class="text-italic">Address: <small><?=$_SESSION['custAddress']?></small></h5>
                                                 <?php 
-                                                    }
                                                 }  ?>
                                                 </div>
 
@@ -151,7 +149,7 @@ body * { visibility: hidden; }
     <!-- END: Content-->
    
 <?php include 'footer.php';
-//unset($_SESSION['shopping_cart']);unset($_SESSION['customer']); ?>
+unset($_SESSION['shopping_cart']);unset($_SESSION['customer']); ?>
 <script>
         function printDiv(divName){
             var printContents = document.getElementById(divName).innerHTML;

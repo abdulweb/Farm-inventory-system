@@ -16,6 +16,9 @@ if (empty($_SESSION['shopping_cart'])) {
   $transcationID =substr(md5($custNumber.$custName.time()),0,9);
 
   $_SESSION['customer'] = $transcationID;
+  $_SESSION['custNumber'] = $custNumber;
+  $_SESSION['custAddress'] = $custAddress;
+  $_SESSION['custName'] = $custName;
   //insert into db
     foreach ($_SESSION['shopping_cart'] as $keys => $values) {
       $id = $values['item_id'];
