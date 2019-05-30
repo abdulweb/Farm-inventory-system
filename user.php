@@ -546,17 +546,8 @@ class user extends dbh
 			{
 				$datas [] = $data;
 			}
-			$get =  $datas;
-			foreach ($get as $uniquedata) {
-				if(!in_array($uniquedata, $get)){
-					$newarray [] = $uniquedata;
-				}
-				else{
-					
-				}
-			}
-			return $newarray;
-			
+			return $datas;
+
 		}
 		
 		else{

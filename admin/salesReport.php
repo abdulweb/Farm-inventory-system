@@ -71,6 +71,7 @@ body * { visibility: hidden; }
                                                         $results = $object->salesReport();
                                                         if(!empty($results)){
                                                         $i=1;
+                                                        // print_r($results);
                                                         foreach($results as $value) { 
                                                             if (empty($value['customerName'])) {
                                                                 
