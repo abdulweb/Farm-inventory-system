@@ -538,13 +538,27 @@ class user extends dbh
 	}
 
 	public function salesReport(){
-		$stmt = "SELECT DISTINCT transcationID,customerName,date_add,id from customer_cart WHERE transcationID IS NOT NULL ORDER BY id";
+		$stmt = "SELECT * from customer_cart WHERE transcationID IS NOT NULL ORDER BY id";
 		$result = $this->connect()->query($stmt);
 		$numberrows = $result->num_rows;
 		if ($numberrows > 0) {
+			$datas  = [];
 			while($data = $result->fetch_assoc())
 			{
-				$datas [] = $data;
+				if(count($datas) > 0) {
+					if(array_search($data['transcationID'], $datas) ==  false ) 
+					{
+					 	array_push($datas, $data);
+					}
+					else
+					{
+						//array_push($new_data, $data);
+					}
+				}
+				else{
+					array_push($datas, $data);
+				}
+
 			}
 			return $datas;
 

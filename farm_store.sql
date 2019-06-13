@@ -27,7 +27,7 @@ CREATE TABLE `categories` (
   `name` varchar(100) NOT NULL,
   `date_add` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -36,7 +36,7 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
-INSERT INTO `categories` VALUES (2,'LIVESTOCK','2019-05-16'),(4,'CEREALS','2019-05-17'),(5,'VEGETABLES','2019-05-17'),(6,'FRUIT','2019-05-17'),(7,'OILCROPS','2019-05-17'),(8,'ROOTS AND TUBERS','2019-05-17'),(9,'CITRUS FRUIT','2019-05-17');
+INSERT INTO `categories` VALUES (1,'LIVESTOCK','2019-06-13'),(2,'CEREALS','2019-06-13'),(3,'FRUIT','2019-06-13'),(4,'VEGETABLES','2019-06-13'),(5,'TUBES','2019-06-13');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,9 +52,12 @@ CREATE TABLE `customer_cart` (
   `prdID` int(10) NOT NULL,
   `quantity` int(10) NOT NULL,
   `date_add` varchar(120) DEFAULT NULL,
-  `custID` int(10) NOT NULL,
+  `customerNumber` varchar(13) DEFAULT NULL,
+  `customerAddress` varchar(225) DEFAULT NULL,
+  `customerName` varchar(225) DEFAULT NULL,
+  `transcationID` varchar(225) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +66,7 @@ CREATE TABLE `customer_cart` (
 
 LOCK TABLES `customer_cart` WRITE;
 /*!40000 ALTER TABLE `customer_cart` DISABLE KEYS */;
-INSERT INTO `customer_cart` VALUES (2,6,3,'2017-05-16',0),(3,7,1,'2018-05-15',0),(4,4,10,'2019-05-18',0),(5,5,3,'2019-05-18',0),(6,6,10,'2019-05-18',1),(7,5,4,'2019-05-18',1),(8,3,1,'2019-05-18',1);
+INSERT INTO `customer_cart` VALUES (29,6,4,'2019-05-30','08060451456','Gidan Igwa','Olamide','ae474'),(30,7,4,'2019-05-30','08060451456','Gidan Igwa','Olamide','ae474'),(31,6,10,'2019-05-30','090871234567','Opposite Police Quarters ','Olamide Abdulraheem','4ff65c70a'),(32,7,4,'2019-05-30','090871234567','Opposite Police Quarters ','Olamide Abdulraheem','4ff65c70a'),(33,4,2,'2019-05-30','090871234567','Opposite Police Quarters ','Olamide Abdulraheem','4ff65c70a'),(34,6,1,'2019-05-30','234567890','fcghbjklm,','Olamide Abdulraheem','35f5bf3af'),(35,6,1,'2019-05-30','123567','dcvbnfgnbbvv','Olamide Abdulraheema AA','1586da71e'),(36,6,1,'2019-05-30','1111','qqqqq','Olamide Abdulraheema AA','dc48b40e5'),(37,6,1,'2019-05-30','11','qq','Olamide Abdulraheema AA','2fb5aa9d2'),(38,6,1,'2019-05-30','11','qqqs','Olamide Abdulraheema AA','2581c4677'),(39,6,3,'2019-05-30','090900000','Lautch','Mudassir Adili','ca3372219'),(40,7,4,'2019-05-30','090900000','Lautch','Mudassir Adili','ca3372219'),(41,5,10,'2019-05-30','090900000','Lautch','Mudassir Adili','ca3372219'),(42,4,10,'2019-05-30','090900000','Lautch','Mudassir Adili','ca3372219'),(43,6,1,'2019-05-30','111','aaa','Mudassir Adili','786c4fc26'),(44,5,1,'2019-05-30','111','aaa','Mudassir Adili','786c4fc26'),(45,6,2,'2019-05-30','111','aa','Olamide Abdulraheema AA','c8d77e734'),(46,7,1,'2019-05-30','111','aa','Olamide Abdulraheema AA','c8d77e734'),(47,4,4,'2019-05-30','0900','aaa','Mudassir Adili Ahmed','66a2d886e'),(48,7,2,'2019-05-30','0900','aaa','Mudassir Adili Ahmed','66a2d886e'),(49,5,3,'2019-05-30','0900','aaa','Mudassir Adili Ahmed','66a2d886e'),(50,6,3,'2019-06-13','77','ggggg','Olamide Abdulraheema AA','79c0c84e8'),(51,7,4,'2019-06-13','77','ggggg','Olamide Abdulraheema AA','79c0c84e8'),(52,5,1,'2019-06-13','77','ggggg','Olamide Abdulraheema AA','79c0c84e8'),(53,4,2,'2019-06-13','77','ggggg','Olamide Abdulraheema AA','79c0c84e8'),(54,3,10,'2019-06-13','11','aa','aa','e2642771c'),(55,5,10,'2019-06-13','11','aa','aa','e2642771c'),(56,4,10,'2019-06-13','11','aa','aa','e2642771c'),(57,2,10,'2019-06-13','11','aa','aa','e2642771c');
 /*!40000 ALTER TABLE `customer_cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +113,7 @@ CREATE TABLE `product` (
   `quantity` int(120) NOT NULL,
   `productCategory` int(5) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +122,7 @@ CREATE TABLE `product` (
 
 LOCK TABLES `product` WRITE;
 /*!40000 ALTER TABLE `product` DISABLE KEYS */;
-INSERT INTO `product` VALUES (2,'FISH','350','2019-05-16',120,2),(3,'RICE','300','2019-05-17',10,4),(4,'TOMATOES','150','2019-05-17',140,5),(5,'POTATOE','400','2019-05-17',50,8),(6,'BANANA','30','2019-05-17',120,6),(7,'OLIVES','700','2019-05-17',400,7);
+INSERT INTO `product` VALUES (1,'RICE','15000','2019-06-13',200,2),(2,'FISH','9000','2019-06-13',810,1),(3,'YAM','200000','2019-06-13',210,5),(4,'MANGO','800','2019-06-13',120,3),(5,'PEPPER','300','2019-06-13',1200,4);
 /*!40000 ALTER TABLE `product` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -132,4 +135,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-05-20  9:27:11
+-- Dump completed on 2019-06-13 12:03:36
